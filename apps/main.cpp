@@ -7,6 +7,7 @@
 
 using namespace std;
 using namespace cppshell;
+using namespace cppshell::values;
 
 template<typename T, typename Os>
 void tryAs(const values::ValueString& value, Os& os) {

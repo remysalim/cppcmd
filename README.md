@@ -1,20 +1,21 @@
 # cppshell
+[![Build Status](https://travis-ci.com/RemySphere/cppshell.svg?branch=develop)](https://travis-ci.com/RemySphere/cppshell)
 
 A lightweight and simple C++ command interpreter for your command interpreting needs.
 
 <!-- TOC -->
 
-- [Quick start](#quick-start)
+* [Quick start](#quick-start)
     - [Minimal working sample](#minimal-working-sample)
     - [Parsing arguments](#parsing-arguments)
-- [Exceptions](#exceptions)
-- [Overriding defaults](#overriding-defaults)
+* [Exceptions](#exceptions)
+* [Overriding defaults](#overriding-defaults)
     - [Defining a custom 'Expression'](#defining-a-custom-expression)
     - [Setting the line-end character](#setting-the-line-end-character)
     - [Changing prompt string](#changing-prompt-string)
     - [More](#more)
-- [Building and running tests](#building-and-running-tests)
-- [Contributing](#contributing)
+* [Building and running tests](#building-and-running-tests)
+* [Contributing](#contributing)
 
 <!-- /TOC -->
 
@@ -47,6 +48,10 @@ int main() {
 }
 ```
 
+<p align="center">
+  <img src=".res/demo.gif">
+</p>
+
 ### Parsing arguments
 
 Arguments can be easily parsed from a string using `cppshell::as<T>` in a command callback.
@@ -71,7 +76,7 @@ _i.e_:
 // bool regex mismatch throws
 as<bool>("foobar");
 
-// out of bound thrown
+// out of bound throws
 as<uint8_t>("0xffff");
 
 // trying to hold a signed value into an unsigned type throws

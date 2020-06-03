@@ -12,6 +12,7 @@
 
 using namespace std;
 using namespace cppshell;
+using namespace cppshell::values;
 
 using ExpressionTypes = std::tuple<std::string, const char[], char[]>;
 TEMPLATE_LIST_TEST_CASE("Expression parsing", "[parser][expression]", ExpressionTypes) {
