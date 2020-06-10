@@ -104,7 +104,8 @@ TEST_CASE("Argument parser", "[parser]") {
         // trying to hold a signed value into an unsigned type throws
         REQUIRE_THROWS(as<unsigned int>("-1"));
         // string as string?
-        REQUIRE(as<string>("dummy") == "dummy");
+        string dummy{"dummy"};
+        REQUIRE(as<string>(dummy) == dummy);
         // invalid string conversion throws
         REQUIRE_THROWS(as<int>("number"));
 

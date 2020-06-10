@@ -53,8 +53,10 @@ int main() {
               tryAs<bool>(arg, os);
               tryAs<uint8_t>(arg, os);
               tryAs<uint32_t>(arg, os);
+#ifdef CPPSHELL_HAS_STREAM_OPERATORS
               tryAs<double>(arg, os);
               tryAs<float>(arg, os);
+#endif
           }
       },
       "parse arguments to several types");

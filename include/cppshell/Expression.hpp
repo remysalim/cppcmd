@@ -11,11 +11,6 @@
 
 namespace cppshell {
 
-namespace detail {
-template<typename T>
-struct dependent_false : std::false_type {};
-} // namespace detail
-
 template<typename T, typename K, char Separator = ' '>
 class Expression {
 public:
@@ -48,7 +43,6 @@ private:
     CommandType _command;
     ArgsContainer _args;
 };
-
 
 using DefaultExpression = Expression<std::string, std::vector<values::ValueString>, ' '>;
 } // namespace cppshell

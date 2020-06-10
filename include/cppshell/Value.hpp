@@ -3,6 +3,10 @@
 
 namespace cppshell {
 namespace values {
+namespace detail {
+template<typename T>
+struct dependent_false : std::false_type {};
+} // namespace detail
 
 template<typename T, typename Text>
 static constexpr T as(const Text&& text) {
