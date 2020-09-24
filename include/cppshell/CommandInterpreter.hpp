@@ -35,10 +35,11 @@ class CommandInterpreter : ExpressionType {
 public:
     using Command = typename ExpressionType::CommandType;
     using Args = typename ExpressionType::ArgsContainer;
-    using Callback = std::function<void(Args, OutputStream&)>;
     using HelpString = std::string;
+    using Callback = std::function<void(Args, OutputStream&)>;
+    using CommandValue = std::pair<Callback, HelpString>;
 
-    CommandInterpreter(InputStream& is, OutputStream& os, PromptStream& tty = devNull, std::string_view ps1 = default_ps1)
+    CommandInterpreter(InputStream& is, OutputStream& os, PromptStream& tty = devNull, std::string_view ps1 = defaultPs1)
         : is(is), os(os), tty(tty), ps1(ps1) {
         registerCommand(
           "help",
@@ -51,7 +52,7 @@ public:
                   }
               }
               else {
-                  if (auto c = callback(*args.begin()))
+                  if (auto c = getCallback(*args.begin()))
                       if (c->second.empty())
                           os << "no help available";
                       else
@@ -68,7 +69,7 @@ public:
         std::array<typename InputStream::char_type, inputBufferSize> buffer{};
 
         while (1) {
-            prompt_string();
+            promptString();
             is.getline(buffer.data(), buffer.size(), frameEnd);
             if (is.eof() || is.bad())
                 return;
@@ -98,25 +99,35 @@ public:
 
 private:
     static constexpr unsigned int inputBufferSize = InputBufferSize;
-    static constexpr const char* default_ps1 = ">>> ";
+    static constexpr const char* defaultPs1 = ">>> ";
     static constexpr char frameEnd = FrameEnd;
 
     InputStream& is;
     OutputStream& os;
     PromptStream& tty;
     std::string ps1;
-    std::unordered_map<Command, std::pair<Callback, HelpString>> commands;
+    std::unordered_map<Command, CommandValue> commands;
 
     void invoke(const Command& command, const Args& args) const {
-        if (auto c = callback(command))
+        if (auto c = getCallback(command))
             c->first(args, os);
         else {
             os << "unknown command: " << command << '\n';
-            invoke("help", {});
+            invoke("help");
         }
     }
 
-    std::optional<std::pair<Callback, HelpString>> callback(const Command& command) const {
+    void invoke(const Command& command) const {
+        invoke(command, {});
+    }
+
+    /**
+     * @brief Get the optional callback associated to a command
+     * 
+     * @param command command to get the callback from
+     * @return std::optional<CommandValue> 
+     */
+    std::optional<CommandValue> getCallback(const Command& command) const {
         auto resolvedCommand = commands.find(command);
         if (resolvedCommand != commands.end())
             if (resolvedCommand->second.first)
@@ -125,6 +136,6 @@ private:
         return {};
     }
 
-    void prompt_string() const { tty << ps1; };
+    void promptString() const { tty << ps1; };
 };
 } // namespace cppshell

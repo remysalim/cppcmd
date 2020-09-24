@@ -11,7 +11,7 @@ class CppShellConan(ConanFile):
     topics = ("header-only", "interpreter", "cpp")
     no_copy_source = True
     exports_sources = "include/*"
-    generators = "cmake"
+    generators = "cmake_find_package"
     scm = {
         "type": "git",
         "url": "auto",
@@ -26,7 +26,7 @@ class CppShellConan(ConanFile):
             cmake.test()
 
     def build_requirements(self):
-        self.build_requires("Catch2/2.11.1@catchorg/stable")
+        self.build_requires("catch2/2.13.1")
 
     def package(self):
         self.copy("*.hpp")
