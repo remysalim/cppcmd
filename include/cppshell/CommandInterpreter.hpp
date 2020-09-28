@@ -8,6 +8,7 @@
 #include <string>
 #include <string_view>
 #include <type_traits>
+#include <unordered_map>
 #include <utility>
 
 #include "Expression.hpp"
@@ -63,12 +64,14 @@ public:
               }
           },
           "this help message");
+
+        registerCommand("exit", [this](const auto&, auto&) { exit(); });
     }
 
     void run(bool stopOnError = false) {
         std::array<typename InputStream::char_type, inputBufferSize> buffer{};
 
-        while (1) {
+        while (running) {
             promptString();
             is.getline(buffer.data(), buffer.size(), frameEnd);
             if (is.eof() || is.bad())
@@ -97,6 +100,8 @@ public:
 
     void setPromptString(std::string promptString) { ps1 = promptString; }
 
+    void exit() { running = false; }
+
 private:
     static constexpr unsigned int inputBufferSize = InputBufferSize;
     static constexpr const char* defaultPs1 = ">>> ";
@@ -107,6 +112,7 @@ private:
     PromptStream& tty;
     std::string ps1;
     std::unordered_map<Command, CommandValue> commands;
+    bool running{true};
 
     void invoke(const Command& command, const Args& args) const {
         if (auto c = getCallback(command))
@@ -117,15 +123,13 @@ private:
         }
     }
 
-    void invoke(const Command& command) const {
-        invoke(command, {});
-    }
+    void invoke(const Command& command) const { invoke(command, {}); }
 
     /**
      * @brief Get the optional callback associated to a command
-     * 
+     *
      * @param command command to get the callback from
-     * @return std::optional<CommandValue> 
+     * @return std::optional<CommandValue>
      */
     std::optional<CommandValue> getCallback(const Command& command) const {
         auto resolvedCommand = commands.find(command);

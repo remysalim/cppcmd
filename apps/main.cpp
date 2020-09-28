@@ -27,8 +27,7 @@ int main() {
       "add",
       [](const auto& args, auto& os) {
           int result{0};
-          for (const auto& value : args)
-              result += as<int>(value);
+          for (const auto& value : args) result += as<int>(value);
           os << result << endl;
       },
       "adds integers (e.g: 'add 1 -5 0xab')");
@@ -60,6 +59,9 @@ int main() {
           }
       },
       "parse arguments to several types");
+
+    interpreter.registerCommand(
+      "ps", [&](const auto& args, auto&) { interpreter.setPromptString(*args.begin()); }, "change prompt string");
 
     interpreter.run();
     return 0;
