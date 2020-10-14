@@ -1,21 +1,21 @@
 # cppshell
-[![Build Status](https://travis-ci.com/RemySphere/cppshell.svg?branch=develop)](https://travis-ci.com/RemySphere/cppshell)
+[![Build Status](https://travis-ci.com/remysalim/cppshell.svg?branch=develop)](https://travis-ci.com/remysalim/cppshell)
 
 A lightweight and simple C++ command interpreter for your command interpreting needs.
 
 <!-- TOC -->
 
-* [Quick start](#quick-start)
-    - [Minimal working sample](#minimal-working-sample)
-    - [Parsing arguments](#parsing-arguments)
-* [Exceptions](#exceptions)
-* [Overriding defaults](#overriding-defaults)
-    - [Defining a custom 'Expression'](#defining-a-custom-expression)
-    - [Setting the line-end character](#setting-the-line-end-character)
-    - [Changing prompt string](#changing-prompt-string)
-    - [More](#more)
-* [Building and running tests](#building-and-running-tests)
-* [Contributing](#contributing)
+- [Quick start](#quick-start)
+  - [Minimal working sample](#minimal-working-sample)
+  - [Parsing arguments](#parsing-arguments)
+- [Exceptions](#exceptions)
+- [Overriding defaults](#overriding-defaults)
+  - [Defining a custom 'Expression'](#defining-a-custom-expression)
+  - [Setting the line-end character](#setting-the-line-end-character)
+  - [Changing prompt string](#changing-prompt-string)
+  - [More](#more)
+- [Building and running tests](#building-and-running-tests)
+- [Contributing](#contributing)
 
 <!-- /TOC -->
 
@@ -148,7 +148,7 @@ $ ctest
 
 ## Contributing
 
-* Issues and bugs can be raised on the [Issue tracker on GitHub](https://github.com/RemySphere/cppshell/issues)
+* Issues and bugs can be raised on the [Issue tracker on GitHub](https://github.com/remysalim/cppshell/issues)
 * Pull requests are welcomed!
 
 TO DO:
