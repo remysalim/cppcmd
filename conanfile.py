@@ -26,7 +26,7 @@ class CppShellConan(ConanFile):
             cmake.test()
 
     def build_requirements(self):
-        self.build_requires("catch2/2.13.1")
+        self.build_requires("catch2/2.13.2")
 
     def package(self):
         self.copy("*.hpp")

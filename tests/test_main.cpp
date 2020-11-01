@@ -141,7 +141,7 @@ TEST_CASE("Registering commands", "[interpreter]") {
         interpreter.registerCommand("dummy", [&](const auto& args, auto&) {
             REQUIRE(args.size() == 2);
             arg1 = args[0];
-            arg2 = args[1];
+            arg2 = args[1]();
         });
         inputStream << "foo\ndummy lorem ipsum\nbar\nundefined\n";
         interpreter.run();
