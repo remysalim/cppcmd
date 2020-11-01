@@ -29,21 +29,16 @@ static constexpr T as(const Text& text) {
 #endif
 }
 
-class ValueString {
+class ValueString : public std::string {
 public:
-    explicit ValueString(std::string& str) : text(str) {}
+    explicit ValueString(std::string& str) : std::string(str) {}
+    explicit ValueString(std::string&& str) : ValueString(str) {}
 
     template<typename T>
     T as() const {
-        return ::cppshell::values::as<T>(text);
+        return ::cppshell::values::as<T>(*this);
     }
-    const std::string& operator()() const { return text; }
-
-    operator std::string() const { return text; }
-    friend std::ostream& operator<<(std::ostream& out, const ValueString& value) { return out << value(); }
-
-private:
-    std::string text;
+    const std::string& operator()() const { return *this; }
 };
 
 } // namespace values
