@@ -22,7 +22,7 @@ install:
   - conan user
 script:
   - mkdir build && cd build
-  - conan install .. -scompiler.version=8 -scompiler.libcxx=libstdc++11
-  - cmake .. -G "Unix Makefiles"
+  - conan install .. -scompiler.version=8 -scompiler.libcxx=libstdc++11 -o build_tests=True
+  - conan build .. --configure
   - cmake --build .
   - CTEST_OUTPUT_ON_FAILURE=1 ctest
