@@ -3,11 +3,11 @@
 #include <iostream>
 #include <vector>
 
-#include <cppshell/CommandInterpreter.hpp>
+#include <cppcmd/CommandInterpreter.hpp>
 
 using namespace std;
-using namespace cppshell;
-using namespace cppshell::values;
+using namespace cppcmd;
+using namespace cppcmd::values;
 
 template<typename T, typename Os>
 void tryAs(const values::ValueString& value, Os& os) {
@@ -52,7 +52,7 @@ int main() {
               tryAs<bool>(arg, os);
               tryAs<uint8_t>(arg, os);
               tryAs<uint32_t>(arg, os);
-#ifdef CPPSHELL_HAS_STREAM_OPERATORS
+#ifdef CPPCMD_HAS_STREAM_OPERATORS
               tryAs<double>(arg, os);
               tryAs<float>(arg, os);
 #endif

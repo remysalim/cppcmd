@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 
-namespace cppshell {
+namespace cppcmd {
 namespace values {
 namespace detail {
 template<typename T>
@@ -22,7 +22,7 @@ static constexpr T as(const Text& text) {
     else if constexpr (std::is_integral_v<T>)
         return integer_parser<T>(text);
     else
-#ifdef CPPSHELL_HAS_STREAM_OPERATORS
+#ifdef CPPCMD_HAS_STREAM_OPERATORS
         return stringstream_parser<T>(text);
 #else
         static_assert(detail::dependent_false<T>::value, "don't know how to parse");
@@ -36,10 +36,10 @@ public:
 
     template<typename T>
     T as() const {
-        return ::cppshell::values::as<T>(*this);
+        return ::cppcmd::values::as<T>(*this);
     }
     const std::string& operator()() const { return *this; }
 };
 
 } // namespace values
-} // namespace cppshell
+} // namespace cppcmd

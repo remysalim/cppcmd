@@ -9,7 +9,7 @@
 #include "Parser.hpp"
 #include "Value.hpp"
 
-namespace cppshell {
+namespace cppcmd {
 
 template<typename T, typename K, char Separator = ' '>
 class Expression {
@@ -45,4 +45,4 @@ private:
 };
 
 using DefaultExpression = Expression<std::string, std::vector<values::ValueString>, ' '>;
-} // namespace cppshell
+} // namespace cppcmd

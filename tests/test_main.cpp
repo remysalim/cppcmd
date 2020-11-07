@@ -6,13 +6,13 @@
 #include <string>
 #include <type_traits>
 
-#include <cppshell/CommandInterpreter.hpp>
-#include <cppshell/Expression.hpp>
-#include <cppshell/Value.hpp>
+#include <cppcmd/CommandInterpreter.hpp>
+#include <cppcmd/Expression.hpp>
+#include <cppcmd/Value.hpp>
 
 using namespace std;
-using namespace cppshell;
-using namespace cppshell::values;
+using namespace cppcmd;
+using namespace cppcmd::values;
 
 using ExpressionTypes = std::tuple<std::string, const char[], char[]>;
 TEMPLATE_LIST_TEST_CASE("Expression parsing", "[parser][expression]", ExpressionTypes) {
@@ -109,7 +109,7 @@ TEST_CASE("Argument parser", "[parser]") {
         // invalid string conversion throws
         REQUIRE_THROWS(as<int>("number"));
 
-#ifdef CPPSHELL_HAS_STREAM_OPERATORS
+#ifdef CPPCMD_HAS_STREAM_OPERATORS
         // fallsback to stringstream_parser
         REQUIRE(as<float>("1.2") == 1.2f);
         REQUIRE_THROWS(as<float>("number"));

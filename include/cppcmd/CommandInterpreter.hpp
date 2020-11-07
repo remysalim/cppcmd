@@ -14,7 +14,7 @@
 #include "Expression.hpp"
 #include "Value.hpp"
 
-namespace cppshell {
+namespace cppcmd {
 namespace detail {
 class DevNull : public std::ostream {
 public:
@@ -142,4 +142,4 @@ private:
 
     void promptString() const { tty << ps1; };
 };
-} // namespace cppshell
+} // namespace cppcmd
