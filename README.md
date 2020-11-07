@@ -1,5 +1,5 @@
-# cppshell
-[![Build Status](https://travis-ci.com/remysalim/cppshell.svg?branch=develop)](https://travis-ci.com/remysalim/cppshell)
+# cppcmd
+[![Build Status](https://travis-ci.com/remysalim/cppcmd.svg?branch=develop)](https://travis-ci.com/remysalim/cppcmd)
 
 A lightweight and simple C++ command interpreter for your command interpreting needs.
 
@@ -25,9 +25,9 @@ A lightweight and simple C++ command interpreter for your command interpreting n
 
 ``` cpp
 #include <iostream>
-#include <cppshell/CommandInterpreter.hpp>
+#include <cppcmd/CommandInterpreter.hpp>
 
-using namespace cppshell;
+using namespace cppcmd;
 int main() {
     auto cli = CommandInterpreter(
         std::cin,  // input stream
@@ -54,21 +54,21 @@ int main() {
 
 ### Parsing arguments
 
-Arguments can be easily parsed from a string using `cppshell::as<T>` in a command callback.
+Arguments can be easily parsed from a string using `cppcmd::as<T>` in a command callback.
 
 ``` cpp
 int value = 0;
 cli.registerCommand("foo", [](const auto& args, auto& os) {
     value = as<int>(args[0]);
 
-    // below is valid if Args == cppshell::values::ValueString (default)
+    // below is valid if Args == cppcmd::values::ValueString (default)
     value = args[0].as<int>();
 });
 ```
 
 ## Exceptions
 
-Unexpected parsing errors yield `cppshell::parse_error` exceptions, that extends `std::exception` .
+Unexpected parsing errors yield `cppcmd::parse_error` exceptions, that extends `std::exception` .
 
 _i.e_:
 
@@ -91,7 +91,7 @@ as<float>("number");
 Default is described as follows:
 
 * A `Command` is a `std::string` 
-* `Args` are stored in a `std::vector` of `cppshell::values::ValueString` 
+* `Args` are stored in a `std::vector` of `cppcmd::values::ValueString` 
 * `Callback` signature is a `std::function<void(Args, OutputStream&)>` 
 
 ### Defining a custom 'Expression'
@@ -128,7 +128,7 @@ auto cli = CommandLine(is, os);
 
 ### More
 
-Additional samples and usage can be found in tests sources and in `cppshell-demo` app:
+Additional samples and usage can be found in tests sources and in `cppcmd-demo` app:
 
 * See [apps/main.cpp](apps/main.cpp)
 * See [tests/test_main.cpp](tests/test_main.cpp)
@@ -142,13 +142,13 @@ $ mkdir build && cd build
 $ conan install ..
 
 $ cmake ..
-$ cmake --build . --target cppshell-test
+$ cmake --build . --target cppcmd-test
 $ ctest
 ```
 
 ## Contributing
 
-* Issues and bugs can be raised on the [Issue tracker on GitHub](https://github.com/remysalim/cppshell/issues)
+* Issues and bugs can be raised on the [Issue tracker on GitHub](https://github.com/remysalim/cppcmd/issues)
 * Pull requests are welcomed!
 
 TO DO:

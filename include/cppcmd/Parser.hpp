@@ -3,7 +3,7 @@
 #include <regex>
 #include <string_view>
 
-namespace cppshell {
+namespace cppcmd {
 namespace detail {
 std::basic_regex<char> integer_pattern("(-)?(0x)?([0-9a-zA-Z]+)|((0x)?0)");
 std::basic_regex<char> truthy_pattern("(t|T)(rue)?|1");
@@ -47,7 +47,7 @@ T integer_parser(const std::string& text) {
     return value;
 }
 
-#ifdef CPPSHELL_HAS_STREAM_OPERATORS
+#ifdef CPPCMD_HAS_STREAM_OPERATORS
 template<typename T>
 T stringstream_parser(const std::string& text) {
     T value;
@@ -73,4 +73,4 @@ bool bool_parser(const std::string& text) {
 
     throw parse_error("bool regex mismatch");
 }
-} // namespace cppshell
+} // namespace cppcmd
