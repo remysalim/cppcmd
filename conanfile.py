@@ -7,6 +7,7 @@ class CppShellConan(ConanFile):
     version = "0.1.0"
     settings = "os", "compiler", "arch", "build_type"
     url = "https://github.com/remysalim/cppshell"
+    license = "MIT"
     description = "Simple cpp command interpreter header-only library"
     topics = ("header-only", "interpreter", "cpp")
     no_copy_source = True
